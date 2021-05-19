@@ -1,13 +1,15 @@
-FROM golang:1.14.9-alpine AS builder
+FROM golang:1.15.3-alpine AS builder
 RUN mkdir /build
-ADD app/go.mod app/go.sum app/bank1.go /build/
+ADD go.mod go.sum /app/line_json.go /build/
 WORKDIR /build
-RUN go build
+RUN go build line_json.go
 
-FROM alpine
+FROM builder
 RUN adduser -S -D -H -h /app appuser
 USER appuser
-COPY --from=builder /build/helloworld /app/
+COPY --from=builder /build/line_json /app/helloworld
 COPY views/ /app/views
 WORKDIR /app
+
+EXPOSE 8080
 CMD ["./helloworld"]
