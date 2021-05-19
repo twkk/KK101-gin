@@ -15,8 +15,11 @@ for https://github.com/heyu-exercise/Site-Reliability-Engineering
 - Dockerfile
 - views/form.html
 
-- import
 ```bash
+run_env 	 base: win10, go1.16.4
+docker image base: golang:1.15.3-alpine
+
+- import
 github.com/gin-gonic/gin
 ```
 
@@ -41,6 +44,7 @@ Docker images
  employee	//RESTful sample2 employee	,line_json.go	<< new version
 
 git clone XXXX
+
 cd XXXX
 docker build -t gin-123 .
 docker run --rm -p 8080:8080 -d gin-123
